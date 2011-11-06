@@ -35,12 +35,12 @@ Here is an example config:
            name: "Trunk :: spec"
            
 At this point in time it's the standard [Burro](https://github.com/thenathanjones/burro) configuration.  Check that project for details.
-It will only read the configuration file on startup, so if you make any changes to the file, you will need to restart the service to pick them up.
-Running Luces
+It will only read the configuration file on startup, so if you make any changes to the file, you will need to restart the application to pick them up.
+Running Ojo
 -------------
-The intention is to run Luces as a Windows service which is how it is installed.  It can also run as a standalone file just by running the executable.  If any errors occur when running it, they will appear in the Windows Event log.
+Ojo is a standard WPF application and as such, after installation it can be executed just like any normal application.  
 
 Limitations
 ===========
-At this point in time it only supports USB devices, in particular the Delcom Engineering V2 light because that's all I had access to.  If you would like to contribute alternate lights, by all means, the underlying [NUSB](https://github.com/thenathanjones/nusb) library provides numerous ways of communicating with USB devices.  
+Currently, Ojo is only able to view build servers, but going forward it will be able to control some of them...eventually.
 The types of build servers supported are again limited by whatever [Burro](https://github.com/thenathanjones/burro) is capable of, and as such check that project for what you can use.
