@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Burro, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Burro.0.11\lib\net40\Burro.dll</HintPath>
+      <HintPath>..\packages\Burro.0.11.2\lib\net40\Burro.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
@@ -68,6 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildServerViewModelTest.cs" />
     <Compile Include="CoreTest.cs" />
     <Compile Include="MainWindowTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

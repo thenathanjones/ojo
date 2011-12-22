@@ -39,28 +39,11 @@ namespace Ojo
         public void Initialise(string configFile)
         {
             InitialiseParser(configFile);
-
-            RegisterForUpdates();
         }
 
         private void InitialiseParser(string configFile)
         {
             _parser.Initialise(configFile);
-        }
-
-        private void RegisterForUpdates()
-        {
-            foreach (var buildServer in _parser.BuildServers)
-            {
-                buildServer.PipelinesUpdated += HandlePipelineUpdate;
-            }
-
-            _parser.StartMonitoring();
-        }
-
-        private void HandlePipelineUpdate(IEnumerable<PipelineReport> update)
-        {
-            throw new NotImplementedException();
         }
 
         private void EnsureConfigExists(string configPath)
