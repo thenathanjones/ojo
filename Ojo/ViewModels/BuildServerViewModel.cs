@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Burro;
@@ -8,7 +9,7 @@ namespace Ojo.ViewModels
 {
     public class BuildServerViewModel : INotifyPropertyChanged
     {
-        private IEnumerable<PipelineReport> _pipelineReports;
+        private IEnumerable<PipelineReportViewModel> _pipelineReports;
         private readonly IBuildServer _buildServer;
 
         public BuildServerViewModel(IBuildServer buildServer)
@@ -20,16 +21,16 @@ namespace Ojo.ViewModels
 
         private void SetupPipelines()
         {
-            PipelineReports = _buildServer.PipelineReports;
+            HandlePipelinesUpdated(_buildServer.PipelineReports);
             _buildServer.PipelinesUpdated += HandlePipelinesUpdated;
         }
 
         private void HandlePipelinesUpdated(IEnumerable<PipelineReport> reports)
         {
-            PipelineReports = reports;
+            PipelineReports = reports.Select(p => new PipelineReportViewModel(p));
         }
 
-        public IEnumerable<PipelineReport> PipelineReports
+        public IEnumerable<PipelineReportViewModel> PipelineReports
         {
             get {
                 return _pipelineReports;

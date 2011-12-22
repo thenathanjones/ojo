@@ -58,6 +58,7 @@ namespace Ojo.Tests
 
             Assert.IsNotNull(_buildServerVM.PipelineReports);
             Assert.AreEqual(3, _buildServerVM.PipelineReports.Count());
+            Assert.IsInstanceOf<PipelineReportViewModel>(_buildServerVM.PipelineReports.First());
         }
 
         [Test]
