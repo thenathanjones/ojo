@@ -2,7 +2,16 @@ using Burro;
 
 namespace Ojo.ViewModels
 {
-    public class PipelineReportViewModel : ViewModelBase
+    public interface IPipelineReportViewModel
+    {
+        string Name { get; }
+        string URL { get; }
+        string Activity { get; }
+        string BuildState { get; }
+        ActionCommand OpenLinkCommand { get; }
+    }
+
+    public class PipelineReportViewModel : ViewModelBase, IPipelineReportViewModel
     {
         private readonly PipelineReport _pipelineReport;
 

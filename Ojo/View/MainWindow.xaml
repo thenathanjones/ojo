@@ -1,8 +1,38 @@
 ﻿<Window x:Class="Ojo.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:vm="clr-namespace:Ojo.ViewModels" Height="480" Width="640"
+        WindowStyle="None">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:MainWindowViewModel}">
+            <Grid MouseDown="OnMouseDown">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+                
+                <Label Grid.Row="0" Content="Booyah" />
+                <Button HorizontalAlignment="Right" Command="{Binding CloseApplicationCommand}" Content="X" Height="20" Width="20" />
+                
+                <ListBox Grid.Row="1" ItemsSource="{Binding BuildServers}" />
+            </Grid>
+        </DataTemplate>
         
-    </Grid>
+        <DataTemplate DataType="{x:Type vm:BuildServerViewModel}">
+            <StackPanel Orientation="Vertical">
+                <Label Content="{Binding Type}" />
+                <ListBox ItemsSource="{Binding PipelineReports}" />
+            </StackPanel>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type vm:PipelineReportViewModel}">
+            <StackPanel Orientation="Vertical">
+                <Label Content="{Binding Name}" />
+                <Button Content="Browse" Command="{Binding OpenLinkCommand}" />
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <ContentPresenter Content="{Binding ViewModel}" />
 </Window>

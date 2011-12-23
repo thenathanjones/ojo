@@ -1,4 +1,7 @@
+using System;
 using System.ComponentModel;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace Ojo.ViewModels
 {
@@ -10,6 +13,11 @@ namespace Ojo.ViewModels
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        protected void DispatchAction(Action toDispatch)
+        {
+            Application.Current.Dispatcher.Invoke(toDispatch, DispatcherPriority.Normal);
         }
 
         public virtual event PropertyChangedEventHandler PropertyChanged;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,9 +8,14 @@ using Burro.BuildServers;
 
 namespace Ojo.ViewModels
 {
-    public class BuildServerViewModel : ViewModelBase
+    public interface IBuildServerViewModel
     {
-        private IEnumerable<PipelineReportViewModel> _pipelineReports;
+        ObservableCollection<PipelineReportViewModel> PipelineReports { get; }
+        string Type { get; }
+    }
+
+    public class BuildServerViewModel : ViewModelBase, IBuildServerViewModel
+    {
         private readonly IBuildServer _buildServer;
 
         public BuildServerViewModel(IBuildServer buildServer)
@@ -21,25 +27,29 @@ namespace Ojo.ViewModels
 
         private void SetupPipelines()
         {
-            HandlePipelinesUpdated(_buildServer.PipelineReports);
+            PipelineReports = new ObservableCollection<PipelineReportViewModel>();
+
             _buildServer.PipelinesUpdated += HandlePipelinesUpdated;
         }
 
         private void HandlePipelinesUpdated(IEnumerable<PipelineReport> reports)
         {
-            PipelineReports = reports.Select(p => new PipelineReportViewModel(p));
+            var newReports = reports.Select(p => new PipelineReportViewModel(p));
+
+            var update = new Action(() =>
+                                        {
+                                            PipelineReports.Clear();
+
+                                            foreach (var pipelineReportViewModel in newReports)
+                                            {
+                                                PipelineReports.Add(pipelineReportViewModel);
+                                            }
+                                        });
+
+            DispatchAction(update);
         }
 
-        public IEnumerable<PipelineReportViewModel> PipelineReports
-        {
-            get {
-                return _pipelineReports;
-            }
-            private set {
-                _pipelineReports = value;
-                OnPropertyChanged("PipelineReports");
-            }
-        }
+        public ObservableCollection<PipelineReportViewModel> PipelineReports { get; private set; }
 
         public string Type { get { return _buildServer.Config.Type; } }
 

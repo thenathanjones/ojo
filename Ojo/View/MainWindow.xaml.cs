@@ -10,9 +10,15 @@ namespace Ojo.View
     /// </summary>
     public partial class MainWindow : Window, IMainWindow
     {
+        public MainWindowViewModel ViewModel { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = this;
+
+            Title = "Ojo : Keep an eye on the build...";
         }
 
         public void Initialise(IEnumerable<IBuildServer> buildServers)
@@ -20,6 +26,9 @@ namespace Ojo.View
             ViewModel = new MainWindowViewModel(buildServers);
         }
 
-        protected MainWindowViewModel ViewModel { get; private set; }
+        private void OnMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }

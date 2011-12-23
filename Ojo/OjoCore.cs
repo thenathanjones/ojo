@@ -11,9 +11,9 @@ namespace Ojo
 {
     public class OjoCore
     {
-        private IKernel _kernel;
-
+        private readonly IKernel _kernel;
         private readonly IBurroCore _parser;
+
         private IMainWindow _mainWindow;
 
         public OjoCore(IKernel kernel, IBurroCore parser)
@@ -55,6 +55,8 @@ namespace Ojo
         private void InitialiseParser(string configFile)
         {
             _parser.Initialise(configFile);
+
+            _parser.StartMonitoring();
         }
 
         private void EnsureConfigExists(string configPath)
