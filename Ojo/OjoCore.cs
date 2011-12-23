@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Security.AccessControl;
 using Burro;
 using Ninject;
+using Ojo.View;
 
 namespace Ojo
 {
@@ -12,7 +13,8 @@ namespace Ojo
     {
         private IKernel _kernel;
 
-        private IBurroCore _parser;
+        private readonly IBurroCore _parser;
+        private IMainWindow _mainWindow;
 
         public OjoCore(IKernel kernel, IBurroCore parser)
         {
@@ -39,6 +41,15 @@ namespace Ojo
         public void Initialise(string configFile)
         {
             InitialiseParser(configFile);
+
+            SetupMainWindow();
+        }
+
+        private void SetupMainWindow()
+        {
+            _mainWindow = _kernel.Get<IMainWindow>();
+            _mainWindow.Initialise(_parser.BuildServers);
+            _mainWindow.Show();
         }
 
         private void InitialiseParser(string configFile)

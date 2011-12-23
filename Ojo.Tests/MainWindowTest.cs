@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Threading;
 using NUnit.Framework;
+using Ojo.View;
 
 namespace Ojo.Tests
 {

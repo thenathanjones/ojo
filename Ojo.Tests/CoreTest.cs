@@ -5,9 +5,11 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using Burro;
+using Burro.BuildServers;
 using Moq;
 using NUnit.Framework;
 using Ninject;
+using Ojo.View;
 
 namespace Ojo.Tests
 {
@@ -16,6 +18,7 @@ namespace Ojo.Tests
         private const string DEFAULT_CONFIG_FILE = "./ojo.yml";
         private IKernel _kernel;
         private Mock<IBurroCore> _burro;
+        private Mock<IMainWindow> _mainWindow;
 
         [SetUp]
         public void Setup()
@@ -23,6 +26,9 @@ namespace Ojo.Tests
             _kernel = new StandardKernel();
             _burro = new Mock<IBurroCore>();
             _kernel.Bind<IBurroCore>().ToConstant(_burro.Object);
+
+            _mainWindow = new Mock<IMainWindow>();
+            _kernel.Bind<IMainWindow>().ToConstant(_mainWindow.Object);
 
             // make sure there is always a config file for testing
             if (!File.Exists(DEFAULT_CONFIG_FILE))
@@ -72,6 +78,20 @@ namespace Ojo.Tests
             var core = _kernel.Get<OjoCore>();
             core.Initialise("test2.yml");
             _burro.Verify(b => b.Initialise("test2.yml"), Times.Once());
+        }
+
+        [Test]
+        public void InitialisationShowsInitsAndShowsMainWindow()
+        {
+            var buildServer = new Mock<IBuildServer>();
+            _burro.Setup(b => b.BuildServers).Returns(new[] {buildServer.Object});
+
+            var core = _kernel.Get<OjoCore>();
+            _mainWindow.Verify(m => m.Show(), Times.Never());
+            _mainWindow.Verify(m => m.Initialise(It.IsAny<IEnumerable<IBuildServer>>()), Times.Never());
+            core.Initialise();
+            _mainWindow.Verify(m => m.Show(), Times.Once());
+            _mainWindow.Verify(m => m.Initialise(It.IsAny<IEnumerable<IBuildServer>>()), Times.Once());
         }
     }
 }

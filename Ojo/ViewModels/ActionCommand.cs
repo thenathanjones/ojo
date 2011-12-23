@@ -14,7 +14,7 @@ namespace Ojo.ViewModels
 
         public void Execute(object parameter)
         {
-            _toExecute();
+            _toExecute.Invoke();
         }
 
         public bool CanExecute(object parameter)

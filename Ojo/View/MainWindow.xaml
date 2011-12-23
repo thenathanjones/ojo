@@ -1,4 +1,4 @@
-﻿<Window x:Class="Ojo.MainWindow"
+﻿<Window x:Class="Ojo.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">

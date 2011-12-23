@@ -7,6 +7,7 @@ using System.Windows;
 using Burro;
 using Burro.Util;
 using Ninject;
+using Ojo.View;
 
 namespace Ojo
 {
@@ -21,14 +22,6 @@ namespace Ojo
         public App()
         {
             LoadCore();
-
-            LoadMainWindow();
-        }
-
-        private void LoadMainWindow()
-        {
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
         }
 
         private void LoadCore()
@@ -36,14 +29,17 @@ namespace Ojo
             ConfigureBindings();
 
             _core = _kernel.Get<OjoCore>();
+            _core.Initialise();
         }
 
         private void ConfigureBindings()
         {
             _kernel = new StandardKernel();
-            _kernel.Bind<ITimer>().ToConstant(new TimersTimer(new TimeSpan(0, 0, 5)));
 
+            _kernel.Bind<ITimer>().ToConstant(new TimersTimer(new TimeSpan(0, 0, 5)));
             _kernel.Bind<IBurroCore>().To<BurroCore>();
+
+            _kernel.Bind<IMainWindow>().To<MainWindow>();
         }
     }
 }
