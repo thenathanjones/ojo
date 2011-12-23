@@ -7,7 +7,7 @@ using Burro.BuildServers;
 
 namespace Ojo.ViewModels
 {
-    public class BuildServerViewModel : INotifyPropertyChanged
+    public class BuildServerViewModel : ViewModelBase
     {
         private IEnumerable<PipelineReportViewModel> _pipelineReports;
         private readonly IBuildServer _buildServer;
@@ -43,14 +43,6 @@ namespace Ojo.ViewModels
 
         public string Type { get { return _buildServer.Config.Type; } }
 
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        public override event PropertyChangedEventHandler PropertyChanged;
     }
 }

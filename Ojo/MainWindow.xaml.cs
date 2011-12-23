@@ -11,6 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Burro;
+using Burro.Util;
+using Ninject;
 
 namespace Ojo
 {
@@ -19,6 +22,9 @@ namespace Ojo
     /// </summary>
     public partial class MainWindow : Window
     {
+        private IKernel _kernel;
+        private OjoCore _core;
+
         public MainWindow()
         {
             InitializeComponent();
