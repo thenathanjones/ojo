@@ -18,12 +18,19 @@ namespace Ojo.View
 
             DataContext = this;
 
+            View.MinimizeToTray.Enable(this);
+
             Title = "Ojo : Keep an eye on the build...";
         }
 
         public void Initialise(IEnumerable<IBuildServer> buildServers)
         {
-            ViewModel = new MainWindowViewModel(buildServers);
+            ViewModel = new MainWindowViewModel(this, buildServers);
+        }
+
+        public void MinimizeToTray()
+        {
+            WindowState = WindowState.Minimized;
         }
 
         private void OnMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

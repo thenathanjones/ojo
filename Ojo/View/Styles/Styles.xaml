@@ -5,4 +5,46 @@
         <ResourceDictionary Source="pack://application:,,,/Ojo;component/View/Styles/Brushes.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
+    <!-- default ListBox style -->
+    <Style  TargetType="{x:Type ListBox}">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+    <!-- default MultiSelectListBox style -->
+    <Style x:Key="ListBox.NoBorder" TargetType="{x:Type ListBox}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBox}">
+                    <ScrollViewer Padding="{TemplateBinding Padding}" Focusable="false">
+                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </ScrollViewer>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsGrouping" Value="true">
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListBox.Alternating" BasedOn="{StaticResource ListBox.NoBorder}" TargetType="{x:Type ListBox}">
+        <Setter Property="AlternationCount" Value="2"/>
+    </Style>
+
+    <!-- LABELS -->
+    <Style TargetType="{x:Type Label}">
+        <Setter Property="FontFamily" Value="Calibri" />
+        <Setter Property="Foreground" Value="{StaticResource MainFontColor}" />
+        <Setter Property="Padding" Value="5,0"/>
+    </Style>
+
 </ResourceDictionary>

@@ -1,4 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="MainFontColor" Color="WhiteSmoke"/>
+    <SolidColorBrush x:Key="ContrastingMainFontColor" Color="Black"/>
     
+    <ImageBrush x:Key="Image.Background" ImageSource="pack://application:,,,/Ojo;component/View/Images/ojo.png" />
+
+    <ImageBrush x:Key="Image.Success" ImageSource="pack://application:,,,/Ojo;component/View/Images/success.png" />
+    <ImageBrush x:Key="Image.Failure" ImageSource="pack://application:,,,/Ojo;component/View/Images/failure.png" />
+    <ImageBrush x:Key="Image.Busy" ImageSource="pack://application:,,,/Ojo;component/View/Images/busy.png" />
+
 </ResourceDictionary>

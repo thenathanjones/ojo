@@ -7,5 +7,6 @@ namespace Ojo.View
     {
         void Show();
         void Initialise(IEnumerable<IBuildServer> buildServers);
+        void MinimizeToTray();
     }
 }

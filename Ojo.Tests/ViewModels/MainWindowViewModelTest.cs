@@ -5,6 +5,7 @@ using System.Text;
 using Burro.BuildServers;
 using Moq;
 using NUnit.Framework;
+using Ojo.View;
 using Ojo.ViewModels;
 
 namespace Ojo.Tests.ViewModels
@@ -18,7 +19,7 @@ namespace Ojo.Tests.ViewModels
             var buildServer1 = new Mock<IBuildServer>();
             var buildServer2 = new Mock<IBuildServer>();
 
-            var mainWindowVM = new MainWindowViewModel(new List<IBuildServer>() {buildServer1.Object, buildServer2.Object});
+            var mainWindowVM = new MainWindowViewModel(new Mock<IMainWindow>().Object, new List<IBuildServer>() {buildServer1.Object, buildServer2.Object});
             
             Assert.IsNotNull(mainWindowVM.BuildServers);
             Assert.AreEqual(2, mainWindowVM.BuildServers.Count());
