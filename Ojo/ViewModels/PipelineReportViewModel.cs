@@ -6,8 +6,7 @@ namespace Ojo.ViewModels
     {
         string Name { get; }
         string URL { get; }
-        string Activity { get; }
-        string BuildState { get; }
+        string PipelineState { get; }
         ActionCommand OpenLinkCommand { get; }
     }
 
@@ -31,16 +30,28 @@ namespace Ojo.ViewModels
             get { return _pipelineReport.LinkURL; }
         }
 
-        public string Activity
-        {
-            get { return _pipelineReport.Activity.ToString(); }
-        }
-
-        public string BuildState
-        {
-            get { return _pipelineReport.BuildState.ToString(); }
-        }
-
         public ActionCommand OpenLinkCommand { get; private set; }
+
+        public string PipelineState
+        {
+            get
+            {
+                if (_pipelineReport.BuildState == BuildState.Success)
+                {
+                    if (_pipelineReport.Activity == Activity.Busy)
+                    {
+                        return "Busy";
+                    }
+                    else
+                    {
+                        return "Success";
+                    }
+                }
+                else
+                {
+                    return "Failure";
+                }
+            }
+        }
     }
 }

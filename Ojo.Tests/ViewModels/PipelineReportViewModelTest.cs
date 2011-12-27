@@ -41,21 +41,53 @@ namespace Ojo.Tests.ViewModels
 
             Assert.AreEqual("http://ci:8153/go/pipelines/jimbo", pipelineReportVM.URL);
         }        
-        
-        [Test]
-        public void ExposesActivityAsString()
-        {
-            var pipelineReportVM = new PipelineReportViewModel(_pipeline);
 
-            Assert.AreEqual("Busy", pipelineReportVM.Activity);
-        }        
-        
         [Test]
-        public void ExposesBuildStateAsString()
+        public void CanShowSuccessfulBuild()
         {
-            var pipelineReportVM = new PipelineReportViewModel(_pipeline);
+            var successfulPipeline = new PipelineReport()
+                                         {
+                                             Activity = Activity.Idle,
+                                             BuildState = BuildState.Success,
+                                             LastBuildTime = DateTime.Now,
+                                             LinkURL = "http://ci:8153/go/pipelines/jimbo",
+                                             Name = "CI-Trunk"
+                                         };
 
-            Assert.AreEqual("Success", pipelineReportVM.BuildState);
+            var pipelineReportVM = new PipelineReportViewModel(successfulPipeline);
+            Assert.AreEqual("Success", pipelineReportVM.PipelineState);
+        }
+
+        [Test]
+        public void CanShowFailedBuild()
+        {
+            var failedPipeline = new PipelineReport()
+            {
+                Activity = Activity.Idle,
+                BuildState = BuildState.Failure,
+                LastBuildTime = DateTime.Now,
+                LinkURL = "http://ci:8153/go/pipelines/jimbo",
+                Name = "CI-Trunk"
+            };
+
+            var pipelineReportVM = new PipelineReportViewModel(failedPipeline);
+            Assert.AreEqual("Failure", pipelineReportVM.PipelineState);
+        }
+
+        [Test]
+        public void CanShowBusyBuild()
+        {
+            var busyPipeline = new PipelineReport()
+            {
+                Activity = Activity.Busy,
+                BuildState = BuildState.Success,
+                LastBuildTime = DateTime.Now,
+                LinkURL = "http://ci:8153/go/pipelines/jimbo",
+                Name = "CI-Trunk"
+            };
+
+            var pipelineReportVM = new PipelineReportViewModel(busyPipeline);
+            Assert.AreEqual("Busy", pipelineReportVM.PipelineState);
         }
 
         public void ExposesCommandToOpenLinkInBrowser()

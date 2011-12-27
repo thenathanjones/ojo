@@ -37,13 +37,19 @@
             <DataTemplate DataType="{x:Type vm:PipelineReportViewModel}">
                 <StackPanel Orientation="Vertical" Width="80">
                     <Label Content="{Binding Name}" />
-                    <Label Content="{Binding BuildState}" />
+                    <Label Content="{Binding PipelineState}" />
                     <Rectangle x:Name="StateIndicator" Width="50" Height="50" />
                     <Button Content="Browse" Command="{Binding OpenLinkCommand}" />
                 </StackPanel>
                 <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding BuildState}" Value="Success">
+                    <DataTrigger Binding="{Binding PipelineState}" Value="Success">
                         <Setter TargetName="StateIndicator" Property="Fill" Value="{StaticResource Image.Success}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding PipelineState}" Value="Failure">
+                        <Setter TargetName="StateIndicator" Property="Fill" Value="{StaticResource Image.Failure}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding PipelineState}" Value="Busy">
+                        <Setter TargetName="StateIndicator" Property="Fill" Value="{StaticResource Image.Busy}" />
                     </DataTrigger>
                 </DataTemplate.Triggers>
             </DataTemplate>
