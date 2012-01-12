@@ -6,7 +6,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <!-- default ListBox style -->
-    <Style  TargetType="{x:Type ListBox}">
+    <Style TargetType="{x:Type ListBox}">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -39,12 +39,56 @@
     <Style x:Key="ListBox.Alternating" BasedOn="{StaticResource ListBox.NoBorder}" TargetType="{x:Type ListBox}">
         <Setter Property="AlternationCount" Value="2"/>
     </Style>
+        
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Margin" Value="3" />
+    </Style>
 
     <!-- LABELS -->
-    <Style TargetType="{x:Type Label}">
-        <Setter Property="FontFamily" Value="Calibri" />
+    <Style x:Key="Label.Default" TargetType="{x:Type Label}">
+        <Setter Property="FontFamily" Value="/FontLibrary;Component/#Roboto" />
         <Setter Property="Foreground" Value="{StaticResource MainFontColor}" />
         <Setter Property="Padding" Value="5,0"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource Label.Default}">
+
+    </Style>
+        
+    <Style x:Key="Label.Title" TargetType="{x:Type Label}" >
+        <Setter Property="FontFamily" Value="/FontLibrary;Component/#Pricedown" />
+        <Setter Property="Foreground" Value="{StaticResource MainFontColor}" />
+        <Setter Property="Padding" Value="5,0"/>
+    </Style>
+        
+    <Style x:Key="Label.H1" TargetType="{x:Type Label}" BasedOn="{StaticResource Label.Title}">        
+        <Setter Property="FontSize" Value="50" />
+    </Style>
+
+    <Style x:Key="Label.H2" TargetType="{x:Type Label}" BasedOn="{StaticResource Label.Title}">
+        <Setter Property="FontSize" Value="45" />
+    </Style>
+
+    <Style x:Key="Label.H3" TargetType="{x:Type Label}" BasedOn="{StaticResource Label.Title}">
+        <Setter Property="FontSize" Value="40" />
+    </Style>
+
+    <Style x:Key="Label.H4" TargetType="{x:Type Label}" BasedOn="{StaticResource Label.Title}">
+        <Setter Property="FontSize" Value="35" />
+    </Style>
+
+    <Style x:Key="Label.H5" TargetType="{x:Type Label}" BasedOn="{StaticResource Label.Title}">
+        <Setter Property="FontSize" Value="30" />
+    </Style>
+
+    <Style x:Key="PipelineReportViewModel" TargetType="{x:Type Border}">
+        <Setter Property="Background" Value="{StaticResource TransparentBlack}" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Width" Value="150" />
+        <Setter Property="BorderBrush" Value="WhiteSmoke" />
+        <Setter Property="BorderThickness" Value="1" />
     </Style>
 
 </ResourceDictionary>

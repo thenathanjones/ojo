@@ -17,7 +17,7 @@
                         <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Content="Ojo" />
+                    <Label Grid.Row="0" Content="Ojo" Style="{StaticResource Label.H1}" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Command="{Binding MinimizeToTrayCommand}" Content="-" Height="20" Width="20" />
                         <Button Command="{Binding CloseApplicationCommand}" Content="X" Height="20" Width="20" />
@@ -29,18 +29,20 @@
 
             <DataTemplate DataType="{x:Type vm:BuildServerViewModel}">
                 <StackPanel Orientation="Vertical">
-                    <Label Content="{Binding Type}" />
+                    <Label Content="{Binding Type}" Style="{StaticResource Label.H3}" />
                     <ListBox ItemsSource="{Binding PipelineReports}" />
                 </StackPanel>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type vm:PipelineReportViewModel}">
-                <StackPanel Orientation="Vertical" Width="80">
-                    <Label Content="{Binding Name}" />
-                    <Label Content="{Binding PipelineState}" />
-                    <Rectangle x:Name="StateIndicator" Width="50" Height="50" />
-                    <Button Content="Browse" Command="{Binding OpenLinkCommand}" />
-                </StackPanel>
+                <Border Style="{StaticResource PipelineReportViewModel}">
+                    <StackPanel Orientation="Vertical" >
+                        <Label Content="{Binding Name}" />
+                        <Rectangle x:Name="StateIndicator" Width="50" Height="50" />
+                        <Button Content="Browse" Width="60" Command="{Binding OpenLinkCommand}" />
+                        <Label Content="{Binding Name}" />
+                    </StackPanel>
+                </Border>
                 <DataTemplate.Triggers>
                     <DataTrigger Binding="{Binding PipelineState}" Value="Success">
                         <Setter TargetName="StateIndicator" Property="Fill" Value="{StaticResource Image.Success}" />
@@ -49,7 +51,20 @@
                         <Setter TargetName="StateIndicator" Property="Fill" Value="{StaticResource Image.Failure}" />
                     </DataTrigger>
                     <DataTrigger Binding="{Binding PipelineState}" Value="Busy">
-                        <Setter TargetName="StateIndicator" Property="Fill" Value="{StaticResource Image.Busy}" />
+                        <Setter TargetName="StateIndicator" Property="Fill" Value="{StaticResource Image.Busy}" />                        
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding PipelineState}" Value="Busy">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+        Storyboard.TargetName="StateIndicator" 
+        Storyboard.TargetProperty="Opacity"
+        From="1.0" To="0.0" Duration="0:0:1" 
+        AutoReverse="True" RepeatBehavior="Forever" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
                     </DataTrigger>
                 </DataTemplate.Triggers>
             </DataTemplate>

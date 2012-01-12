@@ -152,6 +152,12 @@
   <ItemGroup>
     <Resource Include="View\Images\busy.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FontLibrary\FontLibrary.csproj">
+      <Project>{BC26A139-42E6-44EF-9D21-16EE63F5C400}</Project>
+      <Name>FontLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

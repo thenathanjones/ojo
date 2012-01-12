@@ -4,6 +4,8 @@
     <SolidColorBrush x:Key="MainFontColor" Color="WhiteSmoke"/>
     <SolidColorBrush x:Key="ContrastingMainFontColor" Color="Black"/>
     
+    <SolidColorBrush x:Key="TransparentBlack" Color="Black" Opacity="0.4" />
+    
     <ImageBrush x:Key="Image.Background" ImageSource="pack://application:,,,/Ojo;component/View/Images/ojo.png" />
 
     <ImageBrush x:Key="Image.Success" ImageSource="pack://application:,,,/Ojo;component/View/Images/success.png" />
